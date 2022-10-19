@@ -117,18 +117,18 @@
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    $day = 10;
-    $month = 5;
-    $year = 2002;
+    $day = 18;
+    $month = 10;
+    $year = 2004;
     $yearT = 2022;
     $monthT = 10;
-    $dayT = 18;
+    $dayT = 19;
 
-    if ($yearT - $year > 0) {
+    if ($yearT - $year > 18) {
         print "Osobnik jest pełnoletni<br>";
-    } else if (($yearT - $year == 0) && ($monthT - $month > 0)) {
+    } else if (($yearT - $year == 18) && ($monthT - $month > 0)) {
         print "Osobnik jest pełnoletni<br>";
-    } else if (($yearT - $year == 0) && ($monthT - $month == 0) && ($dayT - $day >= 0)) {
+    } else if (($yearT - $year == 18) && ($monthT - $month == 0) && ($dayT - $day >= 0)) {
         print "Osobnik jest pełnoletni<br>";
     } else {
         print "Osobnik nie jest pełnoletni<br>";
