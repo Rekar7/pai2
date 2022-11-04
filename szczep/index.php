@@ -152,37 +152,149 @@
 
     print implode($letterTab);
 
-    $showed = array();
-
-    $checker = false;
-    $checker2 = true;
+    print "<br>";
 
     for ($i = 0; $i < 10; $i++) {
-
-        while ($checker == false) {
-            $showed[$i] = rand(0, 9);
-
-            if ($i == 0) {
-                $checker = true;
-            }
-
-            if ($i >= 1) {
-                for ($j = 0; $j < $i; $j++) {
-                    if ($letterTab[$i] == $showed[$j]) {
-                        $checker2 = false;
-                    }
-                    if ($checker2 == true) {
-                        $showed[$i] = $letterTab[$i];
-                    }
-                }
-                $checker2 = true;
-            }
-        }
-        $checker = false;
+        print "losowo: " . $letterTab[rand(0, 9)] . "<br>";
     }
+
+
 
     print "<br>";
     print implode($letterTab);
+
+    /////////////////////////////////////////////////////////////////////
+
+    $liczby = array();
+
+    for ($i = 0; $i < 100; $i++) {
+        $liczby[$i] = rand(0, 1000000);
+    }
+
+    print "<br>Najwyższa wartość: " . max($liczby) . "<br>";
+
+    for ($i = 0; $i < 100; $i++) {
+        if ($liczby[$i] % 2 != 0) {
+            print "<br>Nieparzyste: " . $liczby[$i] . "<br>";
+        }
+    }
+
+    for ($i = 0; $i < 100; $i += 2) {
+
+        print "<br>Nieparzyste indexy: " . $liczby[$i] . " o indeksie: " . $i . "<br>";
+        if ($i == 0) {
+            $i++;
+            print "<br>Nieparzyste indexy: " . $liczby[$i] . " o indeksie: " . $i . "<br>";
+        }
+    }
+
+    $wPrzedziale = array();
+    $ileLiczb = 0;
+    for ($i = 0; $i < 100; $i++) {
+        if (($liczby[$i] >= 5) && ($liczby[$i] < 15)) {
+            $wPrzedziale = $i;
+            $ileLiczb++;
+        }
+    }
+    print "<br>W przedziale jest " . $ileLiczb . " liczb.<br>";
+
+    foreach ($wPrzedziale as $x) {
+        print "<br>W przediale jest liczba: " . $liczby[$x] . ".<br>";
+    }
+
+    $roznica = array();
+    $roznicaIndeks = 0;
+    for ($i = 0; $i < 100; $i++) {
+        $roznica[$i] = $liczby[$i] - $_GET['a'];
+
+        if ($roznica < 0) {
+            $roznica[$i] = $roznica[$i] * (-1);
+        }
+    }
+
+    for ($i = 0; $i < 100; $i++) {
+        if ($roznica[$i] == min($roznica)) {
+            $roznicaIndeks = $i;
+        }
+    }
+
+    print "<br>Najbliżej jest liczba " . $_GET['a'] . " jest liczba: " . $liczby[$roznicaIndeks] . ".<br>";
+
+    $przednik = 0;
+    $nastepnik = 0;
+    for ($i = 0; $i < 100; $i++) {
+        if ($liczby[$i] == min($liczby)) {
+            $przednik = $i - 1;
+            $nastepnik = $i + 1;
+        }
+    }
+
+    $dziesiecTab = array();
+    $dziesiecIndeks = 0;
+    for ($i = 0; $i < 100; $i++) {
+        if ($liczby[$i] > 10) {
+            $dziesiecTab[$dziesiecIndeks] = $liczby[$i];
+            $dziesiecIndeks++;
+        }
+    }
+
+    $liczby2 = array();
+    for ($i = 0; $i < 100; $i++) {
+        $liczby2[$i] = 0;
+        for ($j = 0; $j <= $i; $j++) {
+            $liczby2[$i] += $liczby[$j];
+        }
+    }
+
+    rsort($liczby2);
+
+    $indeksy = array();
+    for ($i = 0; $i < 100; $i++) {
+        $powtorzenia = 0;
+        for ($j = 0; $j < 100; $j++) {
+            if ($liczby2[$i] == $liczby2[$j]) {
+                $indeksy[$powtorzenia] = $j;
+                $powtorzenia++;
+            }
+        }
+        if ($powtorzenia > 3) {
+            for ($j = 0; $j < $powtorzenia; $j++) {
+                print "<br>Powtarza się: " . $liczby2[$indeksy[$j]] . ".<br>";
+            }
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
+    $fiboTab = array_fill(0, 100, NULL);
+    $fiboTab[0]=0;
+    $fiboTab[1]=1;
+    $fiboTab[2]=1;
+    for($i=3;$i<100;$i++)
+    {
+        $fiboTab[$i]=$fiboTab[$i-1]+$fiboTab[$i-2];
+    }
+
+    for($i=0;$i<100;$i++)
+    {
+        $fiboTab[$i]=2**($i+1);
+    }
+
+    $fiboTab[0]=3;
+    for($i=1;$i<100;$i++)
+    {
+        $fiboTab[$i]=$fiboTab[$i-1]+3;
+    }
+
+    $fiboTab[0]=2;
+    for($i=1;$i<100;$i++)
+    {
+        $fiboTab[$i]=$fiboTab[$i-1]*2;
+    }
+
+
+
 
     ?>
 
@@ -191,6 +303,8 @@
         <input type=number name="n2" required><br>
         <input type=number name="n3" required><br>
         <input type=number name="n4" required><br>
+        <label>Liczba a</label>
+        <input type=number name="a" required><br>
         text
         <input type=text name="a1" required><br>
         <input type=text name="a2" required><br>
